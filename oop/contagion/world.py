@@ -34,4 +34,4 @@ class World:
         overlapping = self.canvas.find_overlapping(bbox[0], bbox[1], bbox[2], bbox[3])
         if len(overlapping) > 1:
             for circle_id in overlapping:
-                self.people[circle_id-1].set_goal()
+                self.people[circle_id-1].conflict()

@@ -18,11 +18,15 @@ class Person:
         self.size = 10
         self.radius = self.size / 2
         self.position = p if p != (-1, -1) else self.generate_random_position()
-        self.goal = g if g != (-1, -1) else self.generate_random_goal()
         self.circle = self.world.canvas.create_oval(self.position[0] - self.radius, self.position[1] - self.radius,
                                                     self.position[0] + self.radius, self.position[1] + self.radius,
-                                                    fill="gray")
+                                                    fill="#32527B")
         self.update_freq = int(1000/hz)  # no of calls in 1000 ms
+        self.dir = (0, 0)
+        if g != (-1, -1):
+            self.goal = g
+        else:
+            self.set_goal()
 
     def generate_random_position(self):
         # generating a random position inside the world
@@ -38,6 +42,8 @@ class Person:
         else:
             self.goal = g
 
+        self.set_direction()
+
     def generate_random_goal(self):
         # generating random goals outside the world
         lim_x = self.world.end_point[0]
@@ -50,30 +56,36 @@ class Person:
             rand_y = random.randint(-self.lim_goal, self.lim_goal)
         return rand_x, rand_y
 
-    # def conflict(self, on_left):
-    #     lim_x = self.world.end_point[0]
-    #     lim_y = self.world.end_point[1]
-    #
-    #     if on_left:  # if on left, create new goal on left
-    #         new_x = random.randint(-self.lim_goal, 0)
-    #     else:
-    #         new_x = random.randint(lim_x, self.lim_goal)
-    #
-    #     new_y = 0
-    #     while 0 <= new_y <= lim_y:
-    #         new_y = random.randint(-self.lim_goal, self.lim_goal)
-    #
-    #     self.goal = (new_x, new_y)
+    def conflict(self):
+        # lim_x = self.world.end_point[0]
+        # lim_y = self.world.end_point[1]
 
-    def move_towards_goal(self):
+        self.world.canvas.itemconfig(self.circle, fill='#808080')
+
+        # if on_left:  # if on left, create new goal on left
+        #     new_x = random.randint(-self.lim_goal, 0)
+        # else:
+        #     new_x = random.randint(lim_x, self.lim_goal)
+        #
+        # new_y = 0
+        # while 0 <= new_y <= lim_y:
+        #     new_y = random.randint(-self.lim_goal, self.lim_goal)
+        #
+        # self.goal = (new_x, new_y)
+        self.set_goal()
+
+    def set_direction(self):
         # position and goal are 2D points on XY coordinate system.
         diff_x = self.goal[0] - self.position[0]
         diff_y = self.goal[1] - self.position[1]
 
-        length = (diff_x**2 + diff_y**2)**0.5
+        length = (diff_x ** 2 + diff_y ** 2) ** 0.5
 
-        delta_x = diff_x / length * self.move_by
-        delta_y = diff_y / length * self.move_by
+        self.dir = (diff_x / length, diff_y / length)
+
+    def move_towards_goal(self):
+        delta_x = self.dir[0] * self.move_by
+        delta_y = self.dir[1] * self.move_by
 
         reached_wall = False
 
