@@ -190,7 +190,6 @@ print(balanced_parenthesis("(a+b-c))"))
 print(balanced_parenthesis("((a+b-c)"))
 
 print(balanced_parenthesis(")a+b-c("))
-
 # Double link, Queue and Stack
 
 
@@ -212,28 +211,67 @@ class DoubleLinkList:
         self.size = 0
 
     def append(self, data):
-        print("Append")
+        if not self.top:
+            self.top = DoubleElement(data)
+            self.last = self.top
+        else:
+            self.last.next = DoubleElement(data, _prev=self.last)
+            self.last = self.last.next
+
+        self.size += 1
 
     def pop(self):
-        print("Pop")
+        if self.empty():
+            return None
+
+        last = self.last
+        self.size -= 1
+
+        self.last = self.last.prev
+
+        if self.size == 0:
+            self.top = None
+            self.last = None
+        else:
+            self.last.next = None
+
+        return last
 
     def peek(self):
-        return self.top
+        return self.last
 
     def empty(self):
         return self.size == 0
 
     def get(self, n):
-        print("Get")
+        # if n > self.size:
+        #     return None
+        el = self.top
+        for _ in range(n):
+            # Control without using size
+            if not el.next:
+                return None
+            el = el.next
+        return el
 
     def get_middle(self):
-        print("Middle")
+        # Using size
+        # return self.get(self.size // 2)
+
+        slow = self.top
+        fast = self.top
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow
 
     def insert(self, data, n):
-        print("Insert")
+        print("Implement Insert")
 
     def delete(self, n):
-        print("Delete")
+        print("Implement Delete")
 
     def __repr__(self):
         m_repr = '[' + self.top.__repr__()
@@ -266,7 +304,9 @@ def double_link_test():
     except Exception as e:
         print("List Empty")
 
+
 double_link_test()
+
 
 class CircularLinkList:
 
@@ -276,10 +316,35 @@ class CircularLinkList:
         self.size = 0
 
     def append(self, data):
-        print("Append")
+        if not self.top:
+            self.top = DoubleElement(data)
+            self.last = self.top
+            self.top.prev = self.last
+            self.last.next = self.top
+        else:
+            self.last.next = DoubleElement(data, _next=self.top, _prev=self.last)
+            self.last = self.last.next
+            self.top.prev = self.last
+
+        self.size += 1
 
     def pop(self):
-        print("Pop")
+        if self.empty():
+            return None
+
+        last = self.last
+        self.size -= 1
+
+        self.last = self.last.prev
+
+        if self.size == 0:
+            self.top = None
+            self.last = None
+        else:
+            self.top.prev = self.last
+            self.last.next = self.top
+
+        return last
 
     def peek(self):
         return self.top
@@ -294,6 +359,7 @@ class CircularLinkList:
             m_repr += ' <-> ' + cur.__repr__()
             cur = cur.next
         return m_repr + ' -> ]'
+
 
 def circular_link_test():
     print('===== circular_link_test ====')
@@ -317,14 +383,17 @@ def circular_link_test():
     except Exception as e:
         print("List Empty")
 
+
 circular_link_test()
 
 # Questions
+
 
 def get_element_test():
     print('===== get_element_test ====')
     m_list = DoubleLinkList()
 
+    # 10 elements
     for c in '8964213897':
         m_list.append(int(c))
 
@@ -333,7 +402,9 @@ def get_element_test():
     print(m_list.get(9))
     print(m_list.get(11))
 
+
 get_element_test()
+
 
 def get_middle_element_test():
     print('===== get_middle_element_test ====')
@@ -359,7 +430,9 @@ def get_middle_element_test():
     # 9 element
     print(m_list.get_middle())
 
+
 get_middle_element_test()
+
 
 def insert_test():
     print('===== insert_test ====')
@@ -378,7 +451,9 @@ def insert_test():
     m_list.insert('u', 5)
     print(m_list)
 
+
 insert_test()
+
 
 def delete_test():
     print('===== delete_test ====')
@@ -397,5 +472,6 @@ def delete_test():
 
     m_list.delete(4)
     print(m_list)
+
 
 delete_test()
