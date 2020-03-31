@@ -3,8 +3,6 @@
 char = input("Yan üçgenin karakterini giriniz:\n")
 size = int(input("Yüksekliğini giriniz:\n"))
 
-
-
 for i in range(size):
     print(char*(i+1))
 

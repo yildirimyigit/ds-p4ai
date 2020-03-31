@@ -25,7 +25,6 @@ while True:
         print("No!")
         sel = -1
 
-    
     if sel == 1:
         stunum = input('Student Number: ')
         name = input('Name: ')
@@ -38,7 +37,7 @@ while True:
         name = input('Name: ')
         for i in range(len(names)):
             if names[i] == name:
-                print(name +': '+ str(grades[i]))
+                print(name + ': ' + str(grades[i]))
                 break
     elif sel == 3:
         name = input('Name: ')
@@ -58,10 +57,7 @@ while True:
         print(top_name + ": " + str(top_score))
         
     elif sel == 0:
-		#
-		# Burada lıstelerı file'a yazıyoruz
-		#
-
+        # Burada listeleri file'a yazıyoruz
         break
     else:
         print("Error!")
