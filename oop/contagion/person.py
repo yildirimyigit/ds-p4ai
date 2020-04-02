@@ -9,7 +9,7 @@ class Person:
     p: position
     g: goal
     """
-    def __init__(self, id_in, world, hz, p=(-1, -1), g=(-1, -1), move_by=2, lim_goal=5000):
+    def __init__(self, id_in, world, hz, p=(-1, -1), g=(-1, -1), move_by=1.5, lim_goal=5000):
         self.id = id_in
         self.world = world
         self.isolated = False
@@ -27,6 +27,8 @@ class Person:
             self.goal = g
         else:
             self.set_goal()
+
+        self.infected = False
 
     def generate_random_position(self):
         # generating a random position inside the world
@@ -56,11 +58,13 @@ class Person:
             rand_y = random.randint(-self.lim_goal, self.lim_goal)
         return rand_x, rand_y
 
-    def conflict(self):
+    def conflict(self, person):
         # lim_x = self.world.end_point[0]
         # lim_y = self.world.end_point[1]
 
-        self.world.canvas.itemconfig(self.circle, fill='#808080')
+        if person.infected:
+            self.infected = True
+            self.world.canvas.itemconfig(self.circle, fill='#808080')
 
         # if on_left:  # if on left, create new goal on left
         #     new_x = random.randint(-self.lim_goal, 0)

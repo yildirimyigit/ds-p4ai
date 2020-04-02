@@ -19,9 +19,10 @@ root.update_idletasks()
 # Window-related stuff ends
 
 world = World(canvas)
+world.initialize(70, 40)
 
 # call when resizing
 # world.update_points()
-world.run(70, 40)
+world.run()
 
 root.mainloop()
