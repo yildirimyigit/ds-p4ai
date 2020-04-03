@@ -1,2 +1,4 @@
 .spyderworkspace
+*.spyderproject
 .idea/
+oop/municipality
