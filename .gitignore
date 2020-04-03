@@ -1,4 +1,6 @@
 .spyderworkspace
-*.spyderproject
 .idea/
 oop/municipality
+*.spyderproject
+*.pyc
+*pycache*/
