@@ -185,11 +185,11 @@ def balanced_parenthesis(math_op):
     return mem.empty()
 
 
-print(balanced_parenthesis("(a+(b-c))"))
-print(balanced_parenthesis("(a+b-c))"))
-print(balanced_parenthesis("((a+b-c)"))
-
-print(balanced_parenthesis(")a+b-c("))
+# print(balanced_parenthesis("(a+(b-c))"))
+# print(balanced_parenthesis("(a+b-c))"))
+# print(balanced_parenthesis("((a+b-c)"))
+#
+# print(balanced_parenthesis(")a+b-c("))
 # Double link, Queue and Stack
 
 
@@ -305,7 +305,7 @@ def double_link_test():
         print("List Empty")
 
 
-double_link_test()
+# double_link_test()
 
 
 class CircularLinkList:
@@ -384,7 +384,7 @@ def circular_link_test():
         print("List Empty")
 
 
-circular_link_test()
+# circular_link_test()
 
 # Questions
 
@@ -403,7 +403,7 @@ def get_element_test():
     print(m_list.get(11))
 
 
-get_element_test()
+# get_element_test()
 
 
 def get_middle_element_test():
@@ -431,7 +431,7 @@ def get_middle_element_test():
     print(m_list.get_middle())
 
 
-get_middle_element_test()
+# get_middle_element_test()
 
 
 def insert_test():
@@ -452,7 +452,7 @@ def insert_test():
     print(m_list)
 
 
-insert_test()
+# insert_test()
 
 
 def delete_test():
@@ -474,4 +474,4 @@ def delete_test():
     print(m_list)
 
 
-delete_test()
+# delete_test()
