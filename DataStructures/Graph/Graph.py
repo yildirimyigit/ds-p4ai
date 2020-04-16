@@ -70,7 +70,62 @@ class Graph:
         self.dfs_rec_help(start_id, visited)
 
     def dfs(self, start_id):
-        pass
+        visited = {k: False for k in self.vertex_dict.keys()}
+
+        stack = Stack()
+
+        stack.push(self.vertex_dict[start_id])
+
+        while not stack.empty():
+            curr_node = stack.pop()
+            if not visited[curr_node.data.id]:
+                visited[curr_node.data.id] = True
+                print(f'{curr_node.data.id}', end=', ')
+
+            for neighbor in curr_node.data.get_neighbors():
+                if not visited[neighbor.id]:
+                    stack.push(neighbor)
+
+    def bfs_rec_help(self, start_id, queue, visited):
+        if queue.empty():
+            return
+
+        curr_node = queue.dequeue()
+        print(f'{curr_node.data.id}', end=', ')
+
+        for neighbor in curr_node.data.get_neighbors():
+            if not visited[neighbor.id]:
+                queue.enqueue(neighbor)
+                visited[neighbor.id] = True
+
+        self.bfs_rec_help(start_id, queue, visited)
+
+    def bfs_rec(self, start_id):
+        visited = {k: False for k in self.vertex_dict.keys()}
+
+        queue = Queue()
+
+        queue.enqueue(self.vertex_dict[start_id])
+        visited[start_id] = True
+
+        self.bfs_rec_help(start_id, queue, visited)
+
+    def bfs(self, start_id):
+        visited = {k: False for k in self.vertex_dict.keys()}
+
+        queue = Queue()
+
+        queue.enqueue(self.vertex_dict[start_id])
+        visited[start_id] = True
+
+        while not queue.empty():
+            curr_node = queue.dequeue()
+            print(f'{curr_node.data.id}', end=', ')
+
+            for neighbor in curr_node.data.get_neighbors():
+                if not visited[neighbor.id]:
+                    queue.enqueue(neighbor)
+                    visited[neighbor.id] = True
 
 
 if __name__ == '__main__':
