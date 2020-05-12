@@ -10,6 +10,9 @@ class Vertex:
     def __str__(self):
         return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
+    def __repr__(self):
+        return str(self.id) + ' | ' + str([x.id for x in self.adjacent])
+
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
 
@@ -159,4 +162,10 @@ if __name__ == '__main__':
     g.dfs_rec('a')
     print()
     g.dfs('a')
+    print()
+
+    g.bfs('a')
+    print()
+    g.bfs_rec('a')
+    print()
 
