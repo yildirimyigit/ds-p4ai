@@ -1,1 +1,1 @@
-__all__ = ['Maze']
+__all__ = ['Mazes', 'Visualizer']
